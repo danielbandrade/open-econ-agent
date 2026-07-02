@@ -1,22 +1,70 @@
-# EconAgent: Large Language Model-Empowered Agents for Simulating Macroeconomic Activities
-Official implementation of this ACL 2024 paper.
+# Open Econ Agent
 
-It's based on [Foundation](https://github.com/MaciejMacko/ai-economist), An Economic Simulation Framework, which is announced by this paper: 
+**Run the EconAgent macroeconomic simulation on local open models — no OpenAI key, no per-token cost.**
 
-Zheng, Stephan, et al. "The ai economist: Improving equality and productivity with ai-driven tax policies." arXiv preprint arXiv:2004.13332 (2020).
+Open Econ Agent is a local-first adaptation of [EconAgent (ACL 2024)](https://github.com/tsinghua-fib-lab/ACL24-EconAgent).
+Each simulated agent is a person who, every month, decides how much to **work** and how much to
+**consume**, given their wage, skill, taxes (US federal brackets with redistribution), savings,
+interest rate, and goods prices. Those decisions are made by an LLM; the
+[Foundation / AI-Economist](https://github.com/salesforce/ai-economist) engine steps the macroeconomy
+forward. This fork swaps the paid OpenAI backend for **open models served locally by
+[Ollama](https://ollama.com)** through its OpenAI-compatible endpoint.
 
-# Run
-Simulate with GPT-3.5, 100 agents, and 240 months (fill openai.api_key in simulate_utils.py): 
+## Quickstart
 
-`python simulate.py --policy_model gpt --num_agents 100 --episode_length 240`
+```bash
+# 1. Install and start Ollama, then pull a model
+ollama pull llama3.1:8b
 
-Simulate with Composite, 100 agents, and 240 months:
+# 2. Install Python deps
+pip install -r requirements.txt
 
-`python simulate.py --policy_model complex --num_agents 100 --episode_length 240`
+# 3. Run a small local simulation
+python simulate.py --policy_model llama --num_agents 10 --episode_length 24
+```
 
-For RL approaches, *i.e.*, **The ai economist**, we just follow their training codes and use the trained models for simulations. See appendix in the paper for details.
+Outputs land in `data/<tag>/`: per-agent dialogs, pickled env/observation snapshots,
+dense logs, and `run_meta.json` (model, seed, error count).
 
-# Update in 2024.8.16
-The simulation was only tested using gpt-3.5-turbo-0613, but this model seems to no longer be accessible and has been replaced by gpt-4o-mini. If `gpt_error` is significantly greater than 0 (e.g., exceeding 10), meaning GPT generates many unreasonable decisions, please adjust the prompts accordingly, especially the parts related to format instruction:
+## Choosing a model
 
-*"Please share your decisions in a JSON format. The format should have two keys: 'work' (a value between 0 and 1 with intervals of 0.02, indicating the willingness or propensity to work) and 'consumption' (a value between 0 and 1 with intervals of 0.02, indicating the proportion of all your savings and income you intend to spend on essential goods)."*
+The model is configured once, via environment variables (single source of truth), and can be
+overridden per run with CLI flags:
+
+| Setting      | Env var              | CLI flag         | Default                     |
+| ------------ | -------------------- | ---------------- | --------------------------- |
+| Model        | `OLLAMA_MODEL`       | `--ollama_model` | `llama3.1:8b`               |
+| Server URL   | `OLLAMA_BASE_URL`    | `--ollama_url`   | `http://localhost:11434/v1` |
+| Concurrency  | `OLLAMA_CONCURRENCY` | —                | `3`                         |
+
+```bash
+python simulate.py --policy_model llama --ollama_model qwen2.5:7b --num_agents 10 --episode_length 24
+```
+
+Before a run starts, a preflight checks that Ollama is up and the model is pulled, and fails
+with a clear message (e.g. `ollama pull <model>`) if not.
+
+## Policy models
+
+| `--policy_model`  | Decisions come from                                                  |
+| ----------------- | ------------------------------------------------------------------- |
+| `llama` (default) | A local open model via Ollama                                       |
+| `gpt`             | OpenAI (set your key in `simulate_utils.py`; not required to import) |
+| `complex`         | The composite rule-of-thumb baseline (no LLM)                       |
+
+## A note on small-model reliability
+
+Smaller local models follow the JSON format instructions less reliably than GPT-3.5. When a
+response can't be parsed into a valid `[work, consumption]` action, the agent falls back to a
+neutral action (`[1, 0.5]`) and an **`llm_error` counter** is incremented. The count is printed
+during the run and saved in `run_meta.json`. If it's high, try a larger/instruction-tuned model
+(`--ollama_model`), or tighten the format instructions in `simulate.py`.
+
+## Attribution & license
+
+Open Econ Agent's own code is licensed **BSD-3-Clause** (see [LICENSE](LICENSE)). It builds on:
+
+- **EconAgent** (ACL 2024) — the LLM-agent layer this project adapts. Please cite the paper.
+- **Foundation / The AI Economist** (BSD-3-Clause) — the vendored `ai_economist/` simulation core.
+
+Full credits and citations are in [NOTICE](NOTICE).

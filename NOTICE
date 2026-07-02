@@ -1,0 +1,30 @@
+Open Econ Agent
+===============
+
+This project is a local-first adaptation of EconAgent that runs the
+macroeconomic LLM-agent simulation on open-source models via Ollama.
+
+It builds on two prior works:
+
+1. EconAgent (ACL 2024)
+   "EconAgent: Large Language Model-Empowered Agents for Simulating
+   Macroeconomic Activities."
+   Nian Li, Chen Gao, Mingyu Li, Yong Li, Qingmin Liao. ACL 2024.
+   Repository: https://github.com/tsinghua-fib-lab/ACL24-EconAgent
+
+   The LLM-agent layer of this project (the decision prompts, the
+   dialog/reflection loop, and the composite baseline) is derived from
+   the EconAgent implementation. Open Econ Agent adapts it to local open
+   models and adds tolerant response parsing and configuration.
+
+2. Foundation / The AI Economist (BSD-3-Clause)
+   Zheng, Stephan, et al. "The AI Economist: Improving Equality and
+   Productivity with AI-Driven Tax Policies." arXiv:2004.13332 (2020).
+   Repository: https://github.com/salesforce/ai-economist
+
+   The economic simulation core vendored under `ai_economist/` is the
+   Foundation framework, licensed BSD-3-Clause. Its original license and
+   copyright headers are preserved.
+
+Open Econ Agent's own code is licensed under the BSD 3-Clause License
+(see LICENSE).
