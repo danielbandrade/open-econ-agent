@@ -62,13 +62,14 @@ during the run and saved in `run_meta.json`. If it's high, try a larger/instruct
 
 ## Attribution & license
 
-Open Econ Agent's own code (`simulate.py`, `simulate_utils.py`, the notebook, docs) is
-licensed **BSD-3-Clause** — the full text is at the end of this section. It stands on two prior
-works, which are licensed differently. The table below is the short version.
+This is an educational/research **fork** of EconAgent, adapted to run on local open models.
+Because most of it derives from upstream code, this project makes **no strong copyright claim of
+its own** — the changes here are offered freely for anyone to use, study, and modify, and the
+upstream works keep whatever rights they already have (see below). The table is the short version.
 
-| Component | Origin | License |
+| Component | Origin | Terms |
 | --- | --- | --- |
-| `simulate.py`, `simulate_utils.py`, notebook, docs | This project (adapts EconAgent) | BSD-3-Clause (full text below) |
+| Changes in this fork (`simulate.py`, `simulate_utils.py`, notebook, docs) | This project (adapts EconAgent) | Free to use, study, and modify with attribution; no warranty (see note below) |
 | `ai_economist/` (simulation core) | [Foundation / The AI Economist](https://github.com/salesforce/ai-economist), © 2020 salesforce.com, inc. | BSD-3-Clause ([ai_economist/LICENSE](ai_economist/LICENSE)) |
 | LLM-agent design (prompts, dialog/reflection loop, composite baseline) | [EconAgent, ACL 2024](https://github.com/tsinghua-fib-lab/ACL24-EconAgent) | **No license declared** — see note below |
 
@@ -83,9 +84,9 @@ redistribution as long as that copyright notice and license are retained, which 
 
 The LLM-agent layer this project adapts comes from EconAgent, which **declares no license**.
 Under default copyright law, that means *all rights reserved*: crediting the authors (as we do
-here) is an academic and ethical acknowledgment, but it is **not** a license grant. The BSD-3
-license below covers only *this project's* code — it cannot relicense the EconAgent-derived
-portions, because those are not ours to relicense.
+here) is an academic and ethical acknowledgment, but it is **not** a license grant. This fork
+does not — and cannot — relicense the EconAgent-derived portions, since those are not ours to
+relicense; the soft terms above apply only to the changes made in this fork.
 
 If you plan to rely on or redistribute this repo, be aware of that gap. The clean ways to close
 it are (a) asking the EconAgent authors to add an open-source license, or (b) reimplementing the
@@ -111,39 +112,17 @@ If you use this project academically, please cite both papers:
 }
 ```
 
-### Full license text (Open Econ Agent code)
+### Terms for this fork's changes
 
-```
-BSD 3-Clause License
+The modifications made in this fork are shared informally, in the spirit of a research/teaching
+fork:
 
-Copyright (c) 2025, Daniel Andrade and the Open Econ Agent contributors
-All rights reserved.
+- You're free to use, copy, study, modify, and share them, ideally with a link back to this repo.
+- Please keep the attributions above intact and respect the upstream terms (BSD-3 for
+  `ai_economist/`, all-rights-reserved for EconAgent).
+- Provided **as is, without warranty of any kind**; use at your own risk.
 
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are met:
-
-1. Redistributions of source code must retain the above copyright notice, this
-   list of conditions and the following disclaimer.
-
-2. Redistributions in binary form must reproduce the above copyright notice,
-   this list of conditions and the following disclaimer in the documentation
-   and/or other materials provided with the distribution.
-
-3. Neither the name of the copyright holder nor the names of its
-   contributors may be used to endorse or promote products derived from
-   this software without specific prior written permission.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-```
-
-The vendored `ai_economist/` core keeps its own BSD-3-Clause license at
-[`ai_economist/LICENSE`](ai_economist/LICENSE) (Copyright (c) 2020, salesforce.com, inc.).
+This is a courtesy statement, not a formal software license, and it applies only to the changes
+in this fork — not to the upstream code it builds on. The vendored `ai_economist/` core keeps its
+own BSD-3-Clause license at [`ai_economist/LICENSE`](ai_economist/LICENSE)
+(Copyright (c) 2020, salesforce.com, inc.).
