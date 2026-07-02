@@ -62,9 +62,51 @@ during the run and saved in `run_meta.json`. If it's high, try a larger/instruct
 
 ## Attribution & license
 
-Open Econ Agent's own code is licensed **BSD-3-Clause** (see [LICENSE](LICENSE)). It builds on:
+Open Econ Agent's own code (`simulate.py`, `simulate_utils.py`, the notebook, docs) is
+licensed **BSD-3-Clause** — see [LICENSE](LICENSE). It stands on two prior works, which are
+licensed differently. The table below is the short version; [NOTICE](NOTICE) has full credits.
 
-- **EconAgent** (ACL 2024) — the LLM-agent layer this project adapts. Please cite the paper.
-- **Foundation / The AI Economist** (BSD-3-Clause) — the vendored `ai_economist/` simulation core.
+| Component | Origin | License |
+| --- | --- | --- |
+| `simulate.py`, `simulate_utils.py`, notebook, docs | This project (adapts EconAgent) | BSD-3-Clause ([LICENSE](LICENSE)) |
+| `ai_economist/` (simulation core) | [Foundation / The AI Economist](https://github.com/salesforce/ai-economist), © 2020 salesforce.com, inc. | BSD-3-Clause ([ai_economist/LICENSE](ai_economist/LICENSE)) |
+| LLM-agent design (prompts, dialog/reflection loop, composite baseline) | [EconAgent, ACL 2024](https://github.com/tsinghua-fib-lab/ACL24-EconAgent) | **No license declared** — see note below |
 
-Full credits and citations are in [NOTICE](NOTICE).
+### Foundation / The AI Economist (BSD-3-Clause) — fully compliant
+
+The economic engine vendored under `ai_economist/` is the Foundation framework. Its original
+per-file `Copyright (c) 2020, salesforce.com, inc.` headers are preserved, and its BSD-3-Clause
+license text is included at [`ai_economist/LICENSE`](ai_economist/LICENSE). BSD-3 permits
+redistribution as long as that copyright notice and license are retained, which they are.
+
+### EconAgent (ACL 2024) — attribution, but no license grant
+
+The LLM-agent layer this project adapts comes from EconAgent, which **declares no license**.
+Under default copyright law, that means *all rights reserved*: crediting the authors (as we do
+here and in [NOTICE](NOTICE)) is an academic and ethical acknowledgment, but it is **not** a
+license grant. The BSD-3 `LICENSE` in this repo covers only *this project's* code — it cannot
+relicense the EconAgent-derived portions, because those are not ours to relicense.
+
+If you plan to rely on or redistribute this repo, be aware of that gap. The clean ways to close
+it are (a) asking the EconAgent authors to add an open-source license, or (b) reimplementing the
+agent layer from the paper rather than carrying their code. Use at your own discretion.
+
+### Citing the upstream work
+
+If you use this project academically, please cite both papers:
+
+```bibtex
+@inproceedings{li2024econagent,
+  title     = {EconAgent: Large Language Model-Empowered Agents for Simulating Macroeconomic Activities},
+  author    = {Li, Nian and Gao, Chen and Li, Mingyu and Li, Yong and Liao, Qingmin},
+  booktitle = {Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (ACL)},
+  year      = {2024}
+}
+
+@article{zheng2020aieconomist,
+  title   = {The AI Economist: Improving Equality and Productivity with AI-Driven Tax Policies},
+  author  = {Zheng, Stephan and Trott, Alexander and Srinivasa, Sunil and Naik, Nikhil and Gruesbeck, Melvin and Parkes, David C. and Socher, Richard},
+  journal = {arXiv preprint arXiv:2004.13332},
+  year    = {2020}
+}
+```
