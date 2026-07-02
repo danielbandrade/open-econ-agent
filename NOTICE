@@ -23,8 +23,10 @@ It builds on two prior works:
    Repository: https://github.com/salesforce/ai-economist
 
    The economic simulation core vendored under `ai_economist/` is the
-   Foundation framework, licensed BSD-3-Clause. Its original license and
-   copyright headers are preserved.
+   Foundation framework, licensed BSD-3-Clause. Its original per-file
+   copyright headers are preserved, and its BSD-3-Clause license text is
+   included at `ai_economist/LICENSE` (Copyright (c) 2020, salesforce.com,
+   inc.). That license governs everything under `ai_economist/`.
 
 Open Econ Agent's own code is licensed under the BSD 3-Clause License
 (see LICENSE).
