@@ -63,12 +63,12 @@ during the run and saved in `run_meta.json`. If it's high, try a larger/instruct
 ## Attribution & license
 
 Open Econ Agent's own code (`simulate.py`, `simulate_utils.py`, the notebook, docs) is
-licensed **BSD-3-Clause** — see [LICENSE](LICENSE). It stands on two prior works, which are
-licensed differently. The table below is the short version; [NOTICE](NOTICE) has full credits.
+licensed **BSD-3-Clause** — the full text is at the end of this section. It stands on two prior
+works, which are licensed differently. The table below is the short version.
 
 | Component | Origin | License |
 | --- | --- | --- |
-| `simulate.py`, `simulate_utils.py`, notebook, docs | This project (adapts EconAgent) | BSD-3-Clause ([LICENSE](LICENSE)) |
+| `simulate.py`, `simulate_utils.py`, notebook, docs | This project (adapts EconAgent) | BSD-3-Clause (full text below) |
 | `ai_economist/` (simulation core) | [Foundation / The AI Economist](https://github.com/salesforce/ai-economist), © 2020 salesforce.com, inc. | BSD-3-Clause ([ai_economist/LICENSE](ai_economist/LICENSE)) |
 | LLM-agent design (prompts, dialog/reflection loop, composite baseline) | [EconAgent, ACL 2024](https://github.com/tsinghua-fib-lab/ACL24-EconAgent) | **No license declared** — see note below |
 
@@ -83,9 +83,9 @@ redistribution as long as that copyright notice and license are retained, which 
 
 The LLM-agent layer this project adapts comes from EconAgent, which **declares no license**.
 Under default copyright law, that means *all rights reserved*: crediting the authors (as we do
-here and in [NOTICE](NOTICE)) is an academic and ethical acknowledgment, but it is **not** a
-license grant. The BSD-3 `LICENSE` in this repo covers only *this project's* code — it cannot
-relicense the EconAgent-derived portions, because those are not ours to relicense.
+here) is an academic and ethical acknowledgment, but it is **not** a license grant. The BSD-3
+license below covers only *this project's* code — it cannot relicense the EconAgent-derived
+portions, because those are not ours to relicense.
 
 If you plan to rely on or redistribute this repo, be aware of that gap. The clean ways to close
 it are (a) asking the EconAgent authors to add an open-source license, or (b) reimplementing the
@@ -110,3 +110,40 @@ If you use this project academically, please cite both papers:
   year    = {2020}
 }
 ```
+
+### Full license text (Open Econ Agent code)
+
+```
+BSD 3-Clause License
+
+Copyright (c) 2025, Daniel Andrade and the Open Econ Agent contributors
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this
+   list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+
+3. Neither the name of the copyright holder nor the names of its
+   contributors may be used to endorse or promote products derived from
+   this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+```
+
+The vendored `ai_economist/` core keeps its own BSD-3-Clause license at
+[`ai_economist/LICENSE`](ai_economist/LICENSE) (Copyright (c) 2020, salesforce.com, inc.).
