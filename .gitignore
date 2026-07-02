@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Simulation run outputs
+data/*/
+*.pkl
+
+# OS / editor
+.DS_Store
+.ipynb_checkpoints/
