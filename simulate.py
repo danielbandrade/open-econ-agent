@@ -210,6 +210,7 @@ def complex_actions(env, obs, beta=0.1, gamma=0.1, h=1):
     
 
 def main(policy_model='llama', num_agents=100, episode_length=240, dialog_len=3, beta=0.1, gamma=0.1, h=1, max_price_inflation=0.1, max_wage_inflation=0.05, ollama_model=None, ollama_url=None, seed=None):
+    sys.stdout.reconfigure(line_buffering=True)
     if seed is not None:
         np.random.seed(seed)
     # CLI flags override the env-var defaults in simulate_utils (single source
@@ -250,10 +251,12 @@ def main(policy_model='llama', num_agents=100, episode_length=240, dialog_len=3,
     if policy_model == 'complex':
         policy_model_save = f'{policy_model}-{beta}-{gamma}-{h}-{max_price_inflation}-{max_wage_inflation}{_seed_tag}'
     else:
-        policy_model_save = f'{policy_model}-{dialog_len}-noperception-reflection-1{_seed_tag}'
+        model_name = simulate_utils.OLLAMA_MODEL.replace(':', '-') if policy_model == 'llama' else policy_model
+        policy_model_save = f'{model_name}-{dialog_len}-noperception-reflection-1{_seed_tag}'
     policy_model_save = f'{policy_model_save}-{num_agents}agents-{episode_length}months'
-    if not os.path.exists(f'{save_path}data/{policy_model_save}'):
-        os.makedirs(f'{save_path}data/{policy_model_save}')
+    if os.path.exists(f'{save_path}data/{policy_model_save}'):
+        raise FileExistsError(f'Run already exists: data/{policy_model_save}')
+    os.makedirs(f'{save_path}data/{policy_model_save}')
     if not os.path.exists(f'{save_path}figs/{policy_model_save}'):
         os.makedirs(f'{save_path}figs/{policy_model_save}')
     for epi in range(env.episode_length):
